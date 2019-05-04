@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "build": "ng build",
-    "dev": "ng serve --aot -o",
+    "dev": "ng serve --aot --proxy-config proxy.conf.json -o",
     "heroku-postbuild": "ng build --aot",
     "ng": "ng",
     "server": "babel-node src/server/server",

@@ -2,7 +2,7 @@
   <h3>
     All questions
   </h3>
-  <table class="table">
+  <table class="table" *ngIf="questionsToShow$ | async; let questions; else loading">
     <thead>
       <tr>
         <th>Question</th>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let question of questionsToShow$ | async">
+      <tr *ngFor="let question of questions">
         <td>{{question.question}}</td>
         <td>{{question.answer}}</td>
         <td>
@@ -21,10 +21,22 @@
           </div>
         </td>
         <td>
-          <button>Edit</button>
-          <button>Delete</button>
+          <a routerLink="edit/ + {{question.id}}">
+            <button class="btn btn-sm btn-outline-primary mr-1">
+              Edit
+            </button>
+          </a>
+          <a routerLink="delete/ + {{question.id}}">
+            <button class="btn btn-sm btn-outline-danger">
+              Delete
+            </button>
+          </a>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
 </div>
