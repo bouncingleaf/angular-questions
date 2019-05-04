@@ -7,7 +7,7 @@
     "heroku-postbuild": "ng build --aot",
     "ng": "ng",
     "server": "babel-node src/server/server",
-    "start": "npm index.js",
+    "start": "node src/server/server",
     "start-dev": "concurrently \"npm run server\" \"npm run dev\"",
     "test": "ng test"
   },
