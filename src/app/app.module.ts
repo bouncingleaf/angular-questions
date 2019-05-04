@@ -7,12 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { QuestionComponent } from './question/question.component';
-import { QuestionEditComponent } from './question/question-edit/question-edit.component';
+import { QuestionComponent } from './question-list/question-list.component';
+import { QuestionEditComponent } from './question-edit/question-edit.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: QuestionComponent },
   { path: 'about', component: AboutComponent },
   { path: 'new', component: QuestionEditComponent },
   { path: 'edit/:id', component: QuestionEditComponent },
@@ -24,7 +23,6 @@ const routes: Routes = [
     AboutComponent,
     AppComponent,
     HeaderComponent,
-    HomeComponent,
     QuestionComponent,
     QuestionEditComponent
   ],

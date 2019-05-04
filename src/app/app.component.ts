@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuestionService } from './question/question.service';
+import { QuestionService } from './question-list/question-list.service';
 
 @Component({
   selector: 'app-root',
