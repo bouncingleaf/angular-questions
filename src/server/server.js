@@ -1,7 +1,11 @@
 require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+import express from 'express';
+// import cors from 'cors';
+import bodyParser from 'body-parser';
+import path from 'path';
+// import './initialize-db';
+import { questionRoutes } from './questions';
+
 const PORT = process.env.PORT || 7777;
 // const routes = require('./routes/index');
 
@@ -11,16 +15,32 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Routes
-// app.use('/', routes);
+questionRoutes(app);
+// deleteRoute(app);
+// newRoute(app);
+// updateRoute(app);
 
-// Set the location of static files
-// if (process.env.NODE_ENV == 'production') {
-  app.use(express.static(path.resolve(__dirname, '../../dist/angular-questions/')));
-  app.get('/*', (req,res) => {
-    res.sendFile(path.resolve('index.html'));
-  });
-// }
+// Get a specific user
+app.get('/question/:id', (req, res) => {
+  res.send('user data');
+})
+
+// Save data for a specific user
+app.post('/question/:id', (req, res) => {
+  let id = req.body.id;
+  res.send(`I would edit ${id}`);
+})
+
+// Delete a user
+app.delete('/delete/:id', (req, res) => {
+  let id = req.body.id;
+  res.send(`I would DELETE ${id}`);
+})
+
+app.use(express.static(path.resolve(__dirname, '../../dist/angular-questions/')));
+app.get('/*', (req,res) => {
+  res.sendFile(path.resolve(__dirname, '../index.html'));
+});
 
 // Start listening on the specified port
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
