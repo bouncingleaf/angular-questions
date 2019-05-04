@@ -7,7 +7,6 @@ import path from 'path';
 import { questionRoutes } from './questions';
 
 const PORT = process.env.PORT || 7777;
-// const routes = require('./routes/index');
 
 const app = express();
 
@@ -19,23 +18,6 @@ questionRoutes(app);
 // deleteRoute(app);
 // newRoute(app);
 // updateRoute(app);
-
-// Get a specific user
-app.get('/question/:id', (req, res) => {
-  res.send('user data');
-})
-
-// Save data for a specific user
-app.post('/question/:id', (req, res) => {
-  let id = req.body.id;
-  res.send(`I would edit ${id}`);
-})
-
-// Delete a user
-app.delete('/delete/:id', (req, res) => {
-  let id = req.body.id;
-  res.send(`I would DELETE ${id}`);
-})
 
 app.use(express.static(path.resolve(__dirname, '../../dist/angular-questions/')));
 app.get('/*', (req,res) => {

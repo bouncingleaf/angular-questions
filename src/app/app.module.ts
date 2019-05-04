@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -10,7 +11,7 @@ import { QuestionComponent } from './question/question.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'question/:id', component: QuestionComponent },
+  { path: 'view/:id', component: QuestionComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
