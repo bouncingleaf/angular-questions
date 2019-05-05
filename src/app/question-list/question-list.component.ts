@@ -1,24 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { Question, QuestionService } from './question-list.service';
-import { QuestionStore } from '../store/question-store.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ID } from '@datorama/akita';
+import { Question } from '../state/question.model';
 
 @Component({
   selector: 'app-question-list',
-  templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.scss']
+  templateUrl: './question-list.component.html'
 })
-export class QuestionComponent implements OnInit {
-  questionsToShow$: Observable<Question[]>;
+export class QuestionListComponent implements OnInit {
+  @Input() loading: boolean;
+  @Input() questions: Question[];
+  @Output() delete = new EventEmitter<ID>();
 
-  constructor(
-    private questionSvc: QuestionService,
-    private questionStore: QuestionStore
-  ) {}
+  constructor() {}
 
   ngOnInit() {
-    this.questionsToShow$ = this.questionSvc.getQuestions(2, 3);
   }
 
 }

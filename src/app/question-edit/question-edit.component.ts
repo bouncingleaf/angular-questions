@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-question-edit',
-  templateUrl: './question-edit.component.html',
-  styleUrls: ['./question-edit.component.scss']
+  templateUrl: './question-edit.component.html'
 })
 export class QuestionEditComponent implements OnInit {
   title: string;

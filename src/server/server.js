@@ -15,9 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 questionRoutes(app);
-// deleteRoute(app);
-// newRoute(app);
-// updateRoute(app);
 
 app.use(express.static(path.resolve(__dirname, '../../dist/angular-questions/')));
 app.get('/*', (req,res) => {
