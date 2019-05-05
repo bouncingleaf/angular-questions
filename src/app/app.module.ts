@@ -7,17 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { QuestionEditComponent } from './question-edit/question-edit.component';
+import { QuestionEditPageComponent } from './question-edit/question-edit-page/question-edit-page.component';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { QuestionListPageComponent } from './question-list/question-list-page/question-list-page.component';
-import { QuestionEditComponent } from './question-edit/question-edit.component';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: '', component: QuestionListPageComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'new', component: QuestionEditComponent },
-  { path: 'edit/:id', component: QuestionEditComponent },
+  { path: 'new', component: QuestionEditPageComponent },
+  { path: 'edit/:id', component: QuestionEditPageComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
@@ -26,9 +27,10 @@ const routes: Routes = [
     AboutComponent,
     AppComponent,
     HeaderComponent,
+    QuestionEditComponent,
+    QuestionEditPageComponent,
     QuestionListComponent,
-    QuestionListPageComponent,
-    QuestionEditComponent
+    QuestionListPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

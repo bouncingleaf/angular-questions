@@ -1,0 +1,11 @@
+<div class="card p-2 m-2">
+  <h3>
+    {{title}} Question
+  </h3>
+  <app-question-edit
+    [question]="question"
+    (addDistractor)="addDistractor($event)"
+    (removeDistractor)="removeDistractor($event)"
+    (saveEdit)="saveEdit($event)">
+  </app-question-edit>
+</div>

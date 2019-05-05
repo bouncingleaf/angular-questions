@@ -33,11 +33,17 @@ export class QuestionsService {
   }
 
   update(id, question: Partial<Question>) {
+    console.log('saving', id, question);
     this.questionsStore.update(id, question);
   }
 
   delete(id: ID) {
-    this.http.post('/question/delete/' + id, {});
     this.questionsStore.remove(id);
+    this.http.post('/question/delete/' + id, {});
+  }
+
+  setActive(id: ID) {
+    this.questionsStore.setActive(id);
+    this.http.get('/question/' + id);
   }
 }

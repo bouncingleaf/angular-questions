@@ -4,6 +4,8 @@
   </h3>
   <app-question-list
     [questions]="questions$ | async"
-    [loading]="loading$ | async">
+    [loading]="loading$ | async"
+    (delete)="delete($event)"
+    (setActive)="setActive($event)">
  </app-question-list>
 </div>

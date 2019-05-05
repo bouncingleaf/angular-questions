@@ -17,13 +17,16 @@
         </div>
       </td>
       <td>
-        <a routerLink="edit/ + {{question.id}}">
-          <button class="btn btn-sm btn-outline-primary mr-1">
-            Edit
-          </button>
-        </a>
-          <button (click)="delete.emit(question.id)" class="btn btn-sm btn-outline-danger">
-            Delete
+          <a [routerLink]="'/edit/' + question.id">
+            <button
+              class="btn btn-sm btn-outline-primary mr-1">
+                Edit
+            </button>
+          </a>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="delete.emit(question.id)">
+              Delete
           </button>
       </td>
     </tr>

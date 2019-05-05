@@ -40,4 +40,8 @@ export class QuestionListPageComponent implements OnDestroy, OnInit {
     this.questionsService.delete(id);
   }
 
+  setActive(id: ID) {
+    this.questionsService.setActive(id);
+  }
+
 }
