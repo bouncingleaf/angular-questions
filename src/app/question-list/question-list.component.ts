@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
 
-import { Question, QuestionService } from '../services/question.service';
-import { selectQuestionList } from './../store/selectors/question.selector';
-import { IAppState } from './../store/state/app.state';
-import { GetQuestions } from './../store/actions/question.actions';
-import { Router } from '@angular/router';
+import { Question, QuestionService } from './question-list.service';
+import { QuestionStore } from '../store/question-store.service';
 
 @Component({
   selector: 'app-question-list',
@@ -16,22 +12,13 @@ import { Router } from '@angular/router';
 export class QuestionComponent implements OnInit {
   questionsToShow$: Observable<Question[]>;
 
-  questions$ = this._store.pipe(
-    select(selectQuestionList)
-  );
-
   constructor(
-    private _store: Store<IAppState>,
-    private _router: Router,
-    private questionSvc: QuestionService
+    private questionSvc: QuestionService,
+    private questionStore: QuestionStore
   ) {}
 
   ngOnInit() {
-    this._store.dispatch(new GetQuestions());
-    // this.questionsToShow$ = this.questionSvc.getQuestions(2, 3);
+    this.questionsToShow$ = this.questionSvc.getQuestions(2, 3);
   }
 
-  navigateToQuestion(id: string) {
-    this._router.navigate(['question', id]);
-  }
 }

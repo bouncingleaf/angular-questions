@@ -43,7 +43,7 @@ export const questionRoutes = app => {
    * Update a single question
    * Will create the question if the id is not found
    */
-  app.post('/question/:id', async (req, res) => {
+  app.post('/question/update/:id', async (req, res) => {
     let id = DOMPurify.sanitize(req.params.id) || uuid();
     let { questionName, answer, distractors } = req.body.question;
     let db = await connectDB();
@@ -68,7 +68,7 @@ export const questionRoutes = app => {
   /**
    * Delete a question by ID
    */
-  app.delete('/question/:id', async (req, res) => {
+  app.post('/question/delete/:id', async (req, res) => {
     let id = DOMPurify.sanitize(req.params.id);
     let db = await connectDB();
     try {

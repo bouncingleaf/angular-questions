@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-
-import { GetSelectedQuestion } from './../store/actions/question.actions';
-import { selectSelectedQuestion } from './../store/selectors/question.selector';
-import { IAppState } from './../store/state/app.state';
 
 @Component({
   selector: 'app-question-edit',
@@ -12,10 +7,6 @@ import { IAppState } from './../store/state/app.state';
   styleUrls: ['./question-edit.component.scss']
 })
 export class QuestionEditComponent implements OnInit {
-  question$ = this._store.pipe(
-    select(selectSelectedQuestion)
-  );
-
   title: string;
   question = {
     question: 'test',
@@ -24,15 +15,10 @@ export class QuestionEditComponent implements OnInit {
     distractors: ['no', 'yes', 'maybe']
   };
 
-  constructor(
-    private _store: Store<IAppState>,
-    private _route: ActivatedRoute
-    ) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const idFromRoute = this._route.snapshot.paramMap.get('id');
-    this.title = idFromRoute ? 'Edit' : 'New';
-    this._store.dispatch(new GetSelectedQuestion(idFromRoute));
+    this.title = this.route.snapshot.paramMap.get('id') ? 'Edit' : 'New';
   }
 
 }
