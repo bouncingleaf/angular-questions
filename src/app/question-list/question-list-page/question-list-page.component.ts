@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ID } from '@datorama/akita';
 
 import { Question } from './../../state/question.model';
@@ -10,10 +10,12 @@ import { QuestionsService } from './../../state/questions.service';
   selector: 'app-question-list-page',
   templateUrl: './question-list-page.component.html'
 })
-export class QuestionListPageComponent implements OnDestroy, OnInit {
+export class QuestionListPageComponent implements OnInit {
+  // Observable for the list of questions
   questions$: Observable<Question[]>;
+
+  // Observable that indicates if the page is still loading
   loading$: Observable<boolean>;
-  questionsSubscription: Subscription;
 
   constructor(
     private questionsQuery: QuestionsQuery,
@@ -21,27 +23,17 @@ export class QuestionListPageComponent implements OnDestroy, OnInit {
     ) {}
 
   ngOnInit() {
+    // Kick off getting the questions from the API
+    this.questionsService.getQuestions();
+    // Observable the questions from the store
     this.questions$ = this.questionsQuery.selectAllQuestions$;
+    // Is it still loading?
     this.loading$ = this.questionsQuery.selectLoading();
-
-    this.questionsSubscription = this.questionsService.get().subscribe();
-  }
-
-  ngOnDestroy() {
-    this.questionsSubscription.unsubscribe();
-    this.questionsSubscription = null;
-  }
-
-  add(question: Question) {
-    this.questionsService.add(question);
   }
 
   delete(id: ID) {
+    // Deletes a question
     this.questionsService.delete(id);
-  }
-
-  setActive(id: ID) {
-    this.questionsService.setActive(id);
   }
 
 }

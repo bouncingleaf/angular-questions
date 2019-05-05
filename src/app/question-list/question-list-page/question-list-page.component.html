@@ -5,7 +5,6 @@
   <app-question-list
     [questions]="questions$ | async"
     [loading]="loading$ | async"
-    (delete)="delete($event)"
-    (setActive)="setActive($event)">
+    (delete)="delete($event)">
  </app-question-list>
 </div>

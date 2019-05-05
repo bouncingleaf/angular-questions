@@ -1,20 +1,21 @@
 # questions
 
 ## What is this?
-This is an app based on the application built during the Pluralsight course 
+This is a questions-processing app as an exercise for Pluralsight. :)
+
+I originally wrote an app based on the application built during the Pluralsight course 
 "Building a full stack app with React and Express". 
 https://app.pluralsight.com/library/courses/react-express-full-stack-app-building
 
-Why did I choose to take a Pluralsight course and use that as the foundation for an application? I have written a back end with Express before (the flashcards app on github.com/bouncingleaf). I have written a full stack application using an Angular front end and a proprietary back end (at work). I've just never had the chance to connect Express and MongoDB with Angular.
-
 My intent was to just go through the tutorial, pick up the information about how to connect the front and back end, maybe learn a little about authentication, and then move on.
 
-I really should have known that I was a) going to love learning React too much to give that up, and b) going to run into some completely bizarre bug at the last moment that would derail me for several days (see "Node, NPM, and Heroku" at the end of this document).
+I really should have known that I was a) going to love learning React too much to give that up, and b) going to run into some completely bizarre bug that would derail me for several days.
+
+Eventually I gave up and rewrote the entire application in Angular.
 
 This README includes: 
 
 * Requirements for running locally
-* An overview of the structure of the application
 * Assumptions
 * Limitations and known issues
 * Packages used, and why
@@ -26,16 +27,12 @@ You will need Node, NPM, and MongoDB.
 
 1. Run ***npm install*** from the top level application folder. This will install the dependencies. 
 2. Set up a local MongoDB install to run on port 27017 (the default, at least for Windows).
-3. For Windows, start MongoDB by navigating to the folder where MongoDB is installed, opening a command line, and executing ***mongod.exe***. Leave this running.
-4. In a separate command line window, initialize the database by running ***npm run initialize***. This will take the data from the csv (included here -- see "Limitations and known issues" below) and load it into the MongoDB database. This only needs to be done once. 
-5. Run ***npm run start-dev*** from the top level application folder. Leave this running. This will start both the back end server (on port 7777) and front end server (on port 8080), and it will open up a browser for you to localhost:8080.
-
-## Structure of the application
-
-* ***index.html*** has an element with the id "app" and a call to run bundle.js.
-* ***webpack.config.js***, for the development mode, specifies an entry path of src/app/, an output path of dist/ and a filename of bundle.js with a public path of /.
-* In src/app/, the default file ***index.jsx*** calls ReactDOM.render, passing in Main (from Main.jsx) and the element with the id "app".
-* ***Main.jsx*** sets up a Router (with a history), a Provider (with a store), and establishes several Routes, such as /dashboard and /edit/:id.
+3. You may need to enable authentication for MongoDB. https://docs.mongodb.com/manual/tutorial/enable-authentication/
+   If you do, you might need to create a .env file with this line: 
+   LOCAL_URI = 'mongodb://USER:PASSWORD@localhost:27017/pluralsight-jmroy'
+4. For Windows, start MongoDB by navigating to the folder where MongoDB is installed, opening a command line, and executing ***mongod.exe***. Leave this running.
+5. In a separate command line window, initialize the database by running ***npm run initialize***. This will take the data from the csv (included here as questions.csv -- see "Limitations and known issues" below) and load it into the MongoDB database. This only needs to be done once. 
+6. Run ***npm run start-dev*** from the top level application folder. Leave this running. This will start both the back end server (on port 7777) and front end server (on port 8080), and it will open up a browser for you to localhost:8080.
 
 ## To Do List
 * Allow adding to the distractors multiple
@@ -59,21 +56,15 @@ This application assumes that:
 
 * I converted the CSV file delimiters. The utility I am using for importing into MongoDB could not handle | as a delimiter. Rather than spending more time looking for a better way to import the CSV into MongoDB, I decided to convert. Since there were no # characters in the CSV file, I replaced the existing commas with #, and then replaced the | delimiter with commas. This allowed me to use the csvtojson tool to import the file into json.
 
-* Logging in appears to be slow.
+* Loading the questions, at least for me locally, is a bit slow.
 
-* This isn't the most secure application. For one thing, the password for the user is in clear text in the code. Obviously in a real-world scenario, user passwords wouldn't be entered into the code! 
+* This isn't the most secure application. It could really use an authentication mechanism for both the app and the APIs, and some route guards.
 
 ## Packages used
 
 ### Production dependencies
 
- * axios - sending http requests from the front end
  * dotenv - environment variable assistant
- * history - manage browsing history
- * md5 - authentication
- * react - front end
- * redux - state management
- * saga - side effect management tool
  * uuid - random id generator
 
 ### Dev dependencies:

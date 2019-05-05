@@ -3,7 +3,7 @@ import { ID } from '@datorama/akita';
 import { HttpClient } from '@angular/common/http';
 import { QuestionsStore } from './questions.store';
 import { Question } from './question.model';
-import { tap } from 'rxjs/operators';
+// import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class QuestionsService {
@@ -13,7 +13,7 @@ export class QuestionsService {
     private http: HttpClient) {
   }
 
-  get(pageNumber?: number, pageSize?: number) {
+  getQuestions(pageNumber?: number, pageSize?: number) {
     let url = '/api/question-list';
     if (pageNumber) {
       url += `?pageNumber=${pageNumber}`;
@@ -21,20 +21,18 @@ export class QuestionsService {
         url += `&pageSize=${pageSize}`;
       }
     }
-    return this.http.get<Question[]>(url).pipe(
-      tap(entities => {
-        this.questionsStore.set(entities);
-      })
-    );
+    console.log('url', url);
+
+    this.http.get<Question[]>(url).subscribe(res => {
+      console.log('res', res);
+      this.questionsStore.set(res);
+    });
   }
 
-  add(question: Question) {
-    this.questionsStore.add(question);
-  }
-
-  update(id, question: Partial<Question>) {
-    console.log('saving', id, question);
-    this.questionsStore.update(id, question);
+  update(question: Partial<Question>) {
+    console.log('saving', question.id, question);
+    this.questionsStore.upsert(question.id, question);
+    this.http.post('/question/update/' + question.id, {question});
   }
 
   delete(id: ID) {
@@ -42,8 +40,10 @@ export class QuestionsService {
     this.http.post('/question/delete/' + id, {});
   }
 
-  setActive(id: ID) {
-    this.questionsStore.setActive(id);
-    this.http.get('/question/' + id);
-  }
+  // edit(id: ID) {
+  //   // Set this as the active entity
+  //   this.questionsStore.setActive(id);
+  //   // Go to the entity update page
+  //   this.http.get('/question/' + id);
+  // }
 }

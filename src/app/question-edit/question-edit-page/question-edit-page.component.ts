@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import uuid from 'uuid';
-// import { ID } from '@datorama/akita';
 
 import { Question } from './../../state/question.model';
 import { QuestionsQuery } from './../../state/questions.query';
@@ -20,16 +19,17 @@ export class QuestionEditPageComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.question = this.questionsQuery.getActive() ||
+    this.question = this.questionsQuery.getActive();
+    console.log('getActive said: ', this.question);
+    this.question = this.question ||
       {
         id: '',
         question: '',
         answer: '',
         distractors: []
       };
-    console.log(this.question);
+    console.log('initialized with', this.question);
     this.title = this.question.id ? 'Edit' : 'New';
-    // Set up a new id for a new question
     if (!this.question.id) {
       this.question.id = uuid();
     }
@@ -37,18 +37,19 @@ export class QuestionEditPageComponent implements OnInit {
 
   addDistractor(question: Question) {
     question.distractors.push('');
-    console.log(question);
+    console.log('adding d', question.distractors);
     this.saveEdit(question);
   }
 
   removeDistractor(data: {question: Question, index: number}) {
     data.question.distractors.splice(data.index, 1);
-    console.log(data.question);
+    console.log('removing d', data.question.distractors);
     this.saveEdit(data.question);
   }
 
   saveEdit(question: Question) {
-    this.questionsService.update(question.id, question);
+    console.log('saving', question);
+    this.questionsService.update(question);
   }
 
 }
