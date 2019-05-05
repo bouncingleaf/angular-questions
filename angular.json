@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "angular-questions"
+  "defaultProject": "angular-questions",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
