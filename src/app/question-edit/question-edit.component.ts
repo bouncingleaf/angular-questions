@@ -17,15 +17,17 @@ export class QuestionEditComponent implements OnInit {
   );
 
   title: string;
-  question = {
-    question: 'test',
-    id: 4,
-    answer: 'just a test',
-    distractors: ['no', 'yes', 'maybe']
-  };
+  // question = {
+  //   question: 'test',
+  //   id: 4,
+  //   answer: 'just a test',
+  //   distractors: ['no', 'yes', 'maybe']
+  // };
 
   constructor(
+    // tslint:disable-next-line: variable-name
     private _store: Store<IAppState>,
+    // tslint:disable-next-line: variable-name
     private _route: ActivatedRoute
     ) {}
 

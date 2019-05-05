@@ -2,7 +2,7 @@
   <h3>
     {{title}} Question
   </h3>
-  <form>
+  <form *ngIf="question$ | async; let question">
     <div class="form-group">
       <label for="questionName">Question</label>
       <input

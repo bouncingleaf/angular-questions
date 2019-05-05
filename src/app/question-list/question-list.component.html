@@ -2,10 +2,7 @@
   <h3>
     All questions
   </h3>
-  <p *ngFor="let q of questions$ | async">
-    {{q.question}}
-  </p>
-  <table class="table" *ngIf="questionsToShow$ | async; let questions; else loading">
+  <table class="table" *ngIf="questions$ | async; let questions; else loading">
     <thead>
       <tr>
         <th>Question</th>

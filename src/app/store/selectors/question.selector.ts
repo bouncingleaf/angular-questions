@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { IAppState } from '../state/app.state';
-import { IQuestionState } from '../state/question.state';
+import { IQuestionState } from '../state/questions.state';
 
 const selectQuestions = (state: IAppState) => state.questions;
 
@@ -11,5 +11,5 @@ export const selectQuestionList = createSelector(
 
 export const selectSelectedQuestion = createSelector(
   selectQuestions,
-  (state: IQuestionState) => state.selectedUser
+  (state: IQuestionState) => state.selectedQuestion
 );
