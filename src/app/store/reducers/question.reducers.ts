@@ -1,10 +1,10 @@
 import { initialQuestionState, IQuestionState } from './../state/questions.state';
 import { QuestionActions, EQuestionActions } from './../actions/question.actions';
 
-export function questionReducers(
+export const questionReducers = (
   state = initialQuestionState,
   action: QuestionActions
-): IQuestionState {
+): IQuestionState => {
   switch (action.type) {
     case EQuestionActions.GetQuestionsSuccess: {
       return {
