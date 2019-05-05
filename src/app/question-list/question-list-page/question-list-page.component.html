@@ -1,0 +1,9 @@
+<div class="card p-2 m-2">
+  <h3>
+    All questions
+  </h3>
+  <app-question-list
+    [questions]="questions$ | async"
+    [loading]="loading$ | async">
+ </app-question-list>
+</div>
