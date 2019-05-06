@@ -1,14 +1,16 @@
 # questions
 
 ## What is this?
-This is a questions-processing app I wrote as an exercise for Pluralsight. :)
+This is a questions-processing app I wrote as an exercise for Pluralsight. :) Hi, Pluralsight!
 
-I originally wrote an app based on the application built during the Pluralsight course "Building a full stack app with React and Express" 
-https://app.pluralsight.com/library/courses/react-express-full-stack-app-building. My intent was just to brush up on how to connect the front and back end, maybe learn a little about authentication, and then move on.
+This app was originally based on the application built during the Pluralsight course "Building a full stack app with React and Express" 
+https://app.pluralsight.com/library/courses/react-express-full-stack-app-building. My intent was just to use that course to brush up on how to connect the front and back end, maybe learn a little about authentication, and then move on.
 
-I really should have known that I was a) going to love learning React too much to skip anything, and b) going to run into some bug that would derail me. I ran into several... 
+I really should have known that I was a) going to love learning React too much to skip anything, and b) going to run into some bug that would derail me. I ran into several. I started getting mired in problems I just didn't know enough React to fix.
 
-Eventually I gave up and rewrote the entire application in Angular, starting on Saturday 5/4/19.
+Eventually I gave up and rewrote the entire application in Angular over the course of the weekend. 
+
+The original React repo is on <a href="https://github.com/bouncingleaf/questions">github</a> also.
 
 This README includes: 
 
@@ -28,30 +30,18 @@ You will need Node, NPM, and MongoDB.
 4. In a separate command line window, initialize the database by running `npm run initialize`. This will take the data from the csv (included here as questions.csv -- see "Limitations and known issues" below) and load it into the MongoDB database. This only needs to be done once. 
 5. Run `npm run start-dev` from the top level application folder. Leave this running. This will start both the back end server (on port 7777) and front end server (on port 8080), and it will open up a browser for you to localhost:8080.
 
-## Assumptions
+## Known issues and Limitations
+
+### Assumptions
 
 This application assumes that:
 
 * All of the distractors for a given question will be unique.
 * No # characters are used in the CSV file. (See Limitations, below.)
 
-## Known issues and Limitations
-
-### To Do List
-
-* Get edit to show actual question data
-* Allow adding to the distractors multiple
-* Allow removing from the distractors multiple
-* Confirm that edit works... it might be slowness accessing the database
-* Get delete to actually delete from the store
-* Get delete to actually delete from the database
-* Get add to actually add to the store
-* Get add to actually add to the database
-* Confirm that the APIs can be accessed via JSON
-* validate and sanitize
-* Get the original CSV file read in
-
 ### Limitations
+
+* After spending a week on the React version, and all of a weekend on the Angular version, there are still bugs I haven't been able to work out. This could drag on indefinitely. So I'm submitting it bugs and all. It is what it is.
 
 * I converted the CSV file delimiters. The utility I am using for importing into MongoDB could not handle | as a delimiter. Rather than spending more time looking for a better way to import the CSV into MongoDB, I decided to convert. Since there were no # characters in the CSV file, I replaced the existing commas with #, and then replaced the | delimiter with commas. This allowed me to use the csvtojson tool to import the file into json.
 
@@ -61,7 +51,7 @@ This application assumes that:
 
 * It needs automated testing! One thing I haven't done much but would LOVE to start doing is to use a proper testing suite and do TDD.
 
-* One of the packages has a high risk vulnerability. It's the typical situation where a package depends on a package that depends on a package that is having problems... the dependents are all waiting for the fix.
+* One of the packages has a high risk vulnerability. It's the typical situation where a package depends on a package that depends on a package that is having problems... the dependents are all waiting for the fix. Not much I can do about that...
 
 ## Packages used
 
