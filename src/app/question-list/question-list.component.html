@@ -18,12 +18,12 @@
       </td>
       <td>
           <a [routerLink]="'/edit/' + question.id">
-            <button
+            <button type="button"
               class="btn btn-sm btn-outline-primary mr-1">
                 Edit
             </button>
           </a>
-          <button
+          <button type="button"
             class="btn btn-sm btn-outline-danger"
             (click)="delete.emit(question.id)">
               Delete

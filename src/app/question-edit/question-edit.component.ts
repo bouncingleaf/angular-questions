@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Question } from './../state/question.model';
 
 @Component({
@@ -7,18 +9,14 @@ import { Question } from './../state/question.model';
   templateUrl: './question-edit.component.html'
 })
 export class QuestionEditComponent implements OnInit {
-  @Input() question: Question;
+  @Input() question$: Observable<Question>;
   @Output() saveEdit = new EventEmitter<Question>();
-  @Output() removeDistractor = new EventEmitter<{question: Question, index: number}>();
-  @Output() addDistractor = new EventEmitter<Question>();
   @Output() delete = new EventEmitter<Question>();
 
   questionEditForm = this.formBuilder.group({
-    questionName: ['', Validators.required],
+    questionName: [''],
     answer: [''],
-    distractors: this.formBuilder.array([
-      this.formBuilder.control('')
-    ])
+    distractors: this.formBuilder.array([])
   });
 
   constructor(
@@ -26,25 +24,37 @@ export class QuestionEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.updateForm(this.question);
+    this.question$ = this.question$.pipe(
+      tap(question => {
+        this.updateForm(question);
+      })
+    );
   }
 
   updateForm(question: Question) {
-    this.questionEditForm.controls.questionName.setValue(question.question);
-    this.questionEditForm.controls.answer.setValue(question.answer);
-    this.questionEditForm.controls.distractors.setValue(question.distractors);
+    if (question) {
+      this.questionEditForm.controls.questionName.setValue(question.question);
+      this.questionEditForm.controls.answer.setValue(question.answer);
+      question.distractors.forEach(d => this.distractors.push(this.formBuilder.control(d)));
+    }
   }
 
   get distractors() {
     return this.questionEditForm.get('distractors') as FormArray;
   }
 
-  addAnotherDistractor() {
+  addDistractor() {
     this.distractors.push(this.formBuilder.control(''));
   }
 
   onSubmit() {
-    console.warn(this.questionEditForm.value);
+    const newQuestion = this.questionEditForm.value;
+    this.saveEdit.emit({
+      question: newQuestion.questionName,
+      id: newQuestion.id,
+      answer: newQuestion.answer,
+      distractors: newQuestion.distractors
+    });
   }
 
 }

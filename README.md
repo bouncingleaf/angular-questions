@@ -1,14 +1,14 @@
-# questions
+# angular-questions
 
 ## What is this?
 This is a questions-processing app I wrote as an exercise for Pluralsight. :) Hi, Pluralsight!
 
-This app was originally based on the application built during the Pluralsight course "Building a full stack app with React and Express" 
+This app was originally in React, based on the application built during the Pluralsight course "Building a full stack app with React and Express" 
 https://app.pluralsight.com/library/courses/react-express-full-stack-app-building. My intent was just to use that course to brush up on how to connect the front and back end, maybe learn a little about authentication, and then move on.
 
 I really should have known that I was a) going to love learning React too much to skip anything, and b) going to run into some bug that would derail me. I ran into several. I started getting mired in problems I just didn't know enough React to fix.
 
-Eventually I gave up and rewrote the entire application in Angular over the course of the weekend. 
+Eventually I gave up and rewrote the entire application in Angular over the course of a weekend. 
 
 The original React repo is on <a href="https://github.com/bouncingleaf/questions">github</a> also.
 
@@ -30,7 +30,13 @@ You will need Node, NPM, and MongoDB.
 4. In a separate command line window, initialize the database by running `npm run initialize`. This will take the data from the csv (included here as questions.csv -- see "Limitations and known issues" below) and load it into the MongoDB database. This only needs to be done once. 
 5. Run `npm run start-dev` from the top level application folder. Leave this running. This will start both the back end server (on port 7777) and front end server (on port 8080), and it will open up a browser for you to localhost:8080.
 
-## Known issues and Limitations
+## Known issues and limitations
+
+## Bugs
+
+* Editing, adding, and deleting look good at first but don't file properly.
+* The distractors array on the form isn't right.
+
 
 ### Assumptions
 

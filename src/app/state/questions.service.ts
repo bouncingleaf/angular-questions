@@ -29,7 +29,6 @@ export class QuestionsService {
 
   add(): string {
     const newId = uuid();
-    console.log('adding', newId);
     const newQuestion = {
       id: newId,
       question: 'New Question',
@@ -41,14 +40,12 @@ export class QuestionsService {
   }
 
   update(question: Partial<Question>) {
-    console.log('saving', question.id, question);
     this.questionsStore.upsert(question.id, question);
     this.http.post('/api/question/update/' + question.id, {question});
   }
 
   delete(id: ID) {
     this.questionsStore.remove(id);
-    console.log('mid delete');
     this.http.delete('/api/question/delete/' + id, {});
   }
 

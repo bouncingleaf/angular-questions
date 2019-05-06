@@ -3,9 +3,7 @@
     Edit Question
   </h3>
   <app-question-edit
-    [question]="question$ | async"
-    (addDistractor)="addDistractor($event)"
-    (removeDistractor)="removeDistractor($event)"
+    [question$]="question$"
     (saveEdit)="saveEdit($event)"
     (delete)="deleteQuestion($event)">
   </app-question-edit>

@@ -28,31 +28,14 @@ export class QuestionEditPageComponent implements OnInit {
     });
   }
 
-  addDistractor(question: Question) {
-    if (!question) {
-      console.log('no question');
-    } else {
-      question.distractors.push('');
-      console.log('adding d', question.distractors);
-      this.questionsService.update(question);
-    }
-  }
-
-  removeDistractor(data: {question: Question, index: number}) {
-    console.log('removing data', data);
-    data.question.distractors.splice(data.index, 1);
-    console.log('removing d', data.question.distractors);
-    this.questionsService.update(data.question);
-  }
-
   saveEdit(question: Question) {
-    console.log('saving', question);
+    console.log('saving ', question);
     this.questionsService.update(question);
+    console.log('updated ', question);
     this.router.navigate(['/']);
   }
 
   deleteQuestion(question) {
-    console.log('deleting', question);
     this.questionsService.delete(question.id);
   }
 

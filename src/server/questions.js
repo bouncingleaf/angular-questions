@@ -70,11 +70,9 @@ export const questionRoutes = app => {
    */
   app.delete('/question/delete/:id', async (req, res) => {
     let id = DOMPurify.sanitize(req.params.id);
-    console.log('id to del is', id);
 
     let db = await connectDB();
     try {
-      console.log('connecting to the db.....');
       await db.collection('questions').deleteOne({id});
     }
     catch (e) {
