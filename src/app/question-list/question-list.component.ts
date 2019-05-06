@@ -10,6 +10,4 @@ export class QuestionListComponent {
   @Input() loading: boolean;
   @Input() questions: Question[];
   @Output() delete = new EventEmitter<ID>();
-  @Output() setActive = new EventEmitter<ID>();
-
 }

@@ -23,8 +23,6 @@ export class QuestionListPageComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    // Kick off getting the questions from the API
-    this.questionsService.getQuestions();
     // Observable the questions from the store
     this.questions$ = this.questionsQuery.selectAllQuestions$;
     // Is it still loading?

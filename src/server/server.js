@@ -1,12 +1,9 @@
-require('dotenv').config();
 import express from 'express';
-// import cors from 'cors';
 import bodyParser from 'body-parser';
 import path from 'path';
-// import './initialize-db';
 import { questionRoutes } from './questions';
 
-const PORT = process.env.PORT || 7777;
+const PORT = 7777;
 
 const app = express();
 
